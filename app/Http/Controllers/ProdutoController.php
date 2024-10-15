@@ -68,16 +68,32 @@ class ProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProdutoRequest $request, Produto $produto)
+    public function update(Request $request, $id)
     {
-        //
+        $produto = $this->produto->find($id);
+
+        if(!$produto){
+            return response()->json(['erro' => 'Produto não encontrado!'], 404);
+        }
+
+
+        $produto->update($request->all());
+        return $produto;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produto $produto)
+    public function destroy($id)
     {
-        //
+        $produto = $this->produto->find($id);
+
+        if(!$produto){
+            return response()->json(['erro' => 'Produto não encontrado!'], 404);
+        }
+
+        $produto->delete();
+
+        return response()->json(['msg' => 'Produto deletado com sucesso!'], 200);
     }
 }
