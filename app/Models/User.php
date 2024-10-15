@@ -42,4 +42,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    function regras() {
+        return [
+            'name' => 'required',
+            'password' => 'required'
+        ];
+    }
+
+    public function feedback() {
+        return [
+            'required' => 'O campo :attribute é obrigatório'
+        ];
+    }
+    
 }

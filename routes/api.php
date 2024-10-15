@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,13 @@ use App\Http\Controllers\ProdutoController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//grupo de rotas protegidas por autenticação e inclusão de prefixo de versionamento
+Route::prefix('v1')->middleware('auth:sanctum')->group(function() {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/user', [AuthController::class, 'user']);
+
+    //rotas para produtos
+    Route::apiResource('produto', ProdutoController::class);
 });
-
-Route::apiResource('produto', ProdutoController::class);
