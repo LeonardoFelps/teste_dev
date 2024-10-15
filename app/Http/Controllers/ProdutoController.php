@@ -49,7 +49,12 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        
+        $produto = $this->produto->find($id);
+
+        if(!$produto){
+            return response()->json(['erro' => 'Produto não encontrado!'], 404);
+        }
+        return $produto;
     }
 
     /**
