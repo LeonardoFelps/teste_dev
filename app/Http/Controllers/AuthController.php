@@ -37,7 +37,7 @@ class AuthController extends Controller
         return response()->json(['msg' => 'Deslogado']);
     }
 
-    public function user(Request $request)
+    public function usuario(Request $request)
     {
         return response()->json($request->user());
     }

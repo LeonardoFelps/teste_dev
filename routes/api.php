@@ -21,7 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 //grupo de rotas protegidas por autenticação e inclusão de prefixo de versionamento
 Route::prefix('v1')->middleware('auth:sanctum')->group(function() {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user', [AuthController::class, 'user']);
+    Route::get('/usuario', [AuthController::class, 'usuario']);
 
     //rotas para produtos
     Route::apiResource('produto', ProdutoController::class);
